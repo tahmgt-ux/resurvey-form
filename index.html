@@ -307,6 +307,36 @@
   .login-error{background:var(--error-bg);color:var(--error);border-radius:10px;padding:10px 12px;font-size:12.5px;font-weight:600;margin-bottom:14px;display:none;}
   .login-demo-note{font-size:11px;color:var(--text-400);text-align:center;margin-top:16px;}
 
+  /* Home */
+  .home-hero{padding:22px 20px 10px;}
+  .home-hero h2{font-size:16px;margin:0 0 2px;}
+  .home-hero p{font-size:12.5px;color:var(--text-600);margin:0;}
+  .home-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 16px 20px;}
+  .home-tile{
+    background:var(--card);border-radius:18px;padding:22px 14px;text-align:center;
+    border:1px solid var(--border);box-shadow:var(--shadow);cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    transition:transform .12s ease;
+  }
+  .home-tile:active{transform:scale(0.96);}
+  .home-tile-icon{
+    width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+  }
+  .home-tile-icon svg{width:28px;height:28px;}
+  .home-tile.t1 .home-tile-icon{background:var(--green-100);} .home-tile.t1 .home-tile-icon svg{stroke:var(--green-600);}
+  .home-tile.t2 .home-tile-icon{background:#E7F0FA;} .home-tile.t2 .home-tile-icon svg{stroke:var(--blue-700);}
+  .home-tile.t3 .home-tile-icon{background:var(--gold-100);} .home-tile.t3 .home-tile-icon svg{stroke:var(--gold-600);}
+  .home-tile.t4 .home-tile-icon{background:#F3E8FA;} .home-tile.t4 .home-tile-icon svg{stroke:#7A3FA0;}
+  .home-tile-label{font-size:13.5px;font-weight:700;color:var(--text-900);}
+  .home-tile-sub{font-size:11px;color:var(--text-600);}
+
+  /* Search / detail lookup (Adangal & 1B) */
+  .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .detail-field{background:var(--green-100);border:1.5px solid #CDECDD;border-radius:10px;padding:12px 14px;}
+  .detail-field .df-label{font-size:11px;font-weight:600;color:var(--green-600);text-transform:uppercase;letter-spacing:0.4px;}
+  .detail-field .df-value{font-size:15px;font-weight:600;margin-top:3px;color:var(--text-900);}
+  .search-group-note{font-size:12px;font-weight:600;color:var(--blue-700);padding:10px 14px 2px;}
+
   /* Reports */
   .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
   .stat-card{background:var(--card);border-radius:12px;padding:14px;border:1px solid var(--border);box-shadow:var(--shadow);text-align:center;}
@@ -343,6 +373,89 @@
     </div>
   </div>
 
+  <!-- ================= HOME VIEW ================= -->
+  <div id="homeView" style="display:none;">
+    <div class="topbar">
+      <div class="brandrow" style="justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="seal"></div>
+          <div class="brandtext">
+            <div class="eyebrow">ఆంధ్రప్రదేశ్ ప్రభుత్వం &middot; రెవెన్యూ శాఖ</div>
+            <h1>రీ-సర్వే పట్టాదారు ధృవీకరణ</h1>
+          </div>
+        </div>
+      </div>
+      <div class="topmeta">
+        <span id="homeUserLabel">—</span>
+        <div class="topmeta-links">
+          <span class="admin-link" onclick="showAdmin()">అడ్మిన్ డాష్‌బోర్డ్ →</span>
+          <span class="admin-link" onclick="doLogout()">లాగ్అవుట్</span>
+        </div>
+      </div>
+    </div>
+    <div class="home-hero">
+      <h2>ఏమి చేయాలనుకుంటున్నారు?</h2>
+      <p>క్రింద ఒక ఎంపికను ఎంచుకోండి</p>
+    </div>
+    <div class="home-grid">
+      <div class="home-tile t1" onclick="showSearchView('adangal')">
+        <div class="home-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+        <div class="home-tile-label">అడంగల్ శోధన</div>
+        <div class="home-tile-sub">Adangal Search</div>
+      </div>
+      <div class="home-tile t2" onclick="showSearchView('1b')">
+        <div class="home-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M8 15h3"/></svg></div>
+        <div class="home-tile-label">1-బి శోధన</div>
+        <div class="home-tile-sub">1B Search</div>
+      </div>
+      <div class="home-tile t3" onclick="showEntryForm()">
+        <div class="home-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="home-tile-label">రీ-సర్వే నమోదు</div>
+        <div class="home-tile-sub">Re-Survey Entry Form</div>
+      </div>
+      <div class="home-tile t4" onclick="showReports()">
+        <div class="home-tile-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg></div>
+        <div class="home-tile-label">నివేదికలు</div>
+        <div class="home-tile-sub">Reports</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= LOOKUP SEARCH VIEW (Adangal / 1-B) ================= -->
+  <div id="searchView" style="display:none;">
+    <div class="topbar">
+      <div class="brandrow" style="justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="seal"></div>
+          <div class="brandtext">
+            <div class="eyebrow">ఆంధ్రప్రదేశ్ ప్రభుత్వం &middot; రెవెన్యూ శాఖ</div>
+            <h1 id="searchViewTitle">అడంగల్ శోధన</h1>
+          </div>
+        </div>
+        <button class="home-btn" onclick="goHome()" title="హోమ్‌కు వెళ్ళండి" aria-label="హోమ్">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <div>
+            <p class="card-title" id="lookupCardTitle">రికార్డు వెతకండి</p>
+            <p class="card-sub">ఖాతా నంబర్ లేదా సర్వే నంబర్‌తో వెతకండి</p>
+          </div>
+        </div>
+        <div class="field search-wrap">
+          <label>వెతకండి <span class="req">*</span></label>
+          <input type="search" id="lookupSearchInput" placeholder="ఖాతా నం. లేదా సర్వే నం. టైప్ చేయండి…" autocomplete="off">
+          <div class="search-results" id="lookupSearchResults" style="display:none;"></div>
+        </div>
+      </div>
+      <div id="lookupDetailCard" style="display:none;"></div>
+    </div>
+  </div>
+
   <!-- ================= FORM VIEW ================= -->
   <div id="formView" style="display:none;">
     <div class="topbar">
@@ -354,7 +467,7 @@
             <h1>రీ-సర్వే పట్టాదారు ధృవీకరణ</h1>
           </div>
         </div>
-        <button class="home-btn" onclick="goHome()" title="కొత్త నమోదు ప్రారంభించండి" aria-label="హోమ్">
+        <button class="home-btn" onclick="goHome()" title="హోమ్‌కు వెళ్ళండి" aria-label="హోమ్">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
         </button>
       </div>
@@ -483,21 +596,21 @@
           <div class="field">
             <label>రీ-సర్వే ప్రకారం పట్టాదారు పేరు <span class="req">*</span></label>
             <input type="text" id="q7" placeholder="క్షేత్రంలో గమనించిన పేరు నమోదు చేయండి">
-            <div class="hint" id="q7-autohint" style="display:none;color:var(--green-600);">✓ అడంగల్ ప్రకారం అదే వ్యక్తి కాబట్టి స్వయంచాలకంగా నింపబడింది</div>
+            <div class="hint" id="q7-autohint" style="display:none;color:var(--green-600);">✓ అడంగల్ ప్రకారం స్వయంచాలకంగా నింపబడింది — అవసరమైతే మార్చవచ్చు</div>
             <div class="errtext" id="err-q7" style="display:none;">ఈ ఫీల్డ్ తప్పనిసరి.</div>
           </div>
 
           <div class="field">
             <label>రీ-సర్వే ప్రకారం తండ్రి/భర్త పేరు <span class="req">*</span></label>
             <input type="text" id="q7father" placeholder="క్షేత్రంలో గమనించిన తండ్రి/భర్త పేరు">
-            <div class="hint" id="q7father-autohint" style="display:none;color:var(--green-600);">✓ అడంగల్ ప్రకారం అదే వ్యక్తి కాబట్టి స్వయంచాలకంగా నింపబడింది</div>
+            <div class="hint" id="q7father-autohint" style="display:none;color:var(--green-600);">✓ అడంగల్ ప్రకారం స్వయంచాలకంగా నింపబడింది — అవసరమైతే మార్చవచ్చు</div>
             <div class="errtext" id="err-q7father" style="display:none;">ఈ ఫీల్డ్ తప్పనిసరి.</div>
           </div>
 
           <div class="field">
             <label>రీ-సర్వే ప్రకారం విస్తీర్ణం <span class="req">*</span></label>
             <input type="text" id="q7ext" placeholder="ఉదా. 0.34" class="mono-input">
-            <div class="hint" id="q7ext-autohint" style="display:none;color:var(--green-600);">✓ అడంగల్ ప్రకారం అదే విస్తీర్ణం కాబట్టి స్వయంచాలకంగా నింపబడింది</div>
+            <div class="hint" id="q7ext-autohint" style="display:none;color:var(--green-600);">✓ అడంగల్ ప్రకారం స్వయంచాలకంగా నింపబడింది — అవసరమైతే మార్చవచ్చు</div>
             <div class="errtext" id="err-q7ext" style="display:none;">ఈ ఫీల్డ్ తప్పనిసరి.</div>
           </div>
 
@@ -548,9 +661,10 @@
             <div class="card-icon gold"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
             <div><p class="card-title">దరఖాస్తుదారు ఫోటో</p><p class="card-sub">తప్పనిసరి &middot; JPG లేదా PNG</p></div>
           </div>
+          <div class="hint" id="existingPhotoNote" style="display:none;color:var(--blue-700);"></div>
           <div class="upload-box" id="applicantUploadBox" onclick="document.getElementById('applicantPhotoInput').click()">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-            <div class="ub-text">దరఖాస్తుదారు ఫోటో తీయడానికి నొక్కండి</div>
+            <div class="ub-text" id="applicantUploadText">దరఖాస్తుదారు ఫోటో తీయడానికి నొక్కండి</div>
             <div class="ub-sub">క్షేత్ర ధృవీకరణ సమయంలో దరఖాస్తుదారు ఫోటో</div>
           </div>
           <input type="file" id="applicantPhotoInput" accept="image/*" capture="user" style="display:none;">
@@ -583,12 +697,15 @@
   <div id="successView" style="display:none;">
     <div class="success-wrap">
       <div class="success-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
-      <h2>ధృవీకరణ సమర్పించబడింది</h2>
-      <p>రీ-సర్వే రికార్డు విజయవంతంగా సేవ్ చేయబడింది.</p>
+      <h2 id="successTitle">ధృవీకరణ సమర్పించబడింది</h2>
+      <p id="successSub">రీ-సర్వే రికార్డు విజయవంతంగా సేవ్ చేయబడింది.</p>
       <div class="subid-badge" id="finalSubId">RS-2026-000001</div>
       <div class="btnrow" style="margin-top:26px;">
-        <button class="btn btn-secondary" onclick="showAdmin()">డాష్‌బోర్డ్ చూడండి</button>
+        <button class="btn btn-secondary" onclick="showReports()">నివేదికలు చూడండి</button>
         <button class="btn btn-primary" onclick="resetForm()">కొత్త నమోదు</button>
+      </div>
+      <div class="btnrow" style="padding-top:0;">
+        <button class="btn btn-secondary" onclick="goHome()" style="width:100%;">← హోమ్‌కు వెళ్ళండి</button>
       </div>
     </div>
   </div>
@@ -601,7 +718,7 @@
           <div class="seal"></div>
           <div class="brandtext"><div class="eyebrow">ఆంధ్రప్రదేశ్ ప్రభుత్వం &middot; నిర్వాహకుడు</div><h1>ధృవీకరణ డాష్‌బోర్డ్</h1></div>
         </div>
-        <button class="home-btn" onclick="goHome()" title="కొత్త నమోదు ప్రారంభించండి" aria-label="హోమ్">
+        <button class="home-btn" onclick="goHome()" title="హోమ్‌కు వెళ్ళండి" aria-label="హోమ్">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
         </button>
       </div>
@@ -609,7 +726,7 @@
         <span id="adminCount">0 records</span>
         <div class="topmeta-links">
           <span class="admin-link" onclick="showReports()">నివేదికలు</span>
-          <span class="admin-link" onclick="showForm()">← ఫారానికి తిరిగి వెళ్ళండి</span>
+          <span class="admin-link" onclick="goHome()">← హోమ్‌కు వెళ్ళండి</span>
           <span class="admin-link" onclick="doLogout()">లాగ్అవుట్</span>
         </div>
       </div>
@@ -672,13 +789,13 @@
           <div class="seal"></div>
           <div class="brandtext"><div class="eyebrow">ఆంధ్రప్రదేశ్ ప్రభుత్వం &middot; నివేదికలు</div><h1>ధృవీకరణ నివేదికలు</h1></div>
         </div>
-        <button class="home-btn" onclick="goHome()" title="కొత్త నమోదు ప్రారంభించండి" aria-label="హోమ్">
+        <button class="home-btn" onclick="goHome()" title="హోమ్‌కు వెళ్ళండి" aria-label="హోమ్">
           <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
         </button>
       </div>
       <div class="topmeta">
         <span id="reportsMeta">—</span>
-        <span class="admin-link" onclick="showForm()">← ఫారానికి తిరిగి వెళ్ళండి</span>
+        <span class="admin-link" onclick="goHome()">← హోమ్‌కు వెళ్ళండి</span>
       </div>
     </div>
     <div class="content">
@@ -720,14 +837,14 @@
 // response. Aadhaar numbers are pre-masked here too — the real backend
 // (apps-script-backend.gs) never sends full Aadhaar numbers to the browser.
 const MASTER_DATA = [
-  {khata:"585", village:"పేరుపాలెం", rs:"2-1A'", extent:"0.34", pattadar:"కోప్పినేని సీతారామయ్య", father:"సత్యం", enjoyer:"కోప్పినేని సీతారామయ్య", landNature:"మెట్ట", landDesc:"వ్యవసాయ యోగ్యం", aadhaarMasked:"XXXX XXXX 6658"},
-  {khata:"655", village:"పేరుపాలెం", rs:"2-1B'", extent:"0.64", pattadar:"పోన్నమండ నర్సింహస్వామి", father:"వీరస్వామి", enjoyer:"పోన్నమండ నర్సింహస్వామి", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", aadhaarMasked:"XXXX XXXX 5483"},
-  {khata:"1731", village:"పేరుపాలెం", rs:"2-1C'", extent:"0.25", pattadar:"నాగిడి వెంకన్న", father:"స్వామి", enjoyer:"నాగిడి రమణ", landNature:"మెట్ట", landDesc:"వ్యవసాయ యోగ్యం", aadhaarMasked:"XXXX XXXX 1926"},
-  {khata:"4313", village:"పేరుపాలెం", rs:"2-1D'", extent:"0.34", pattadar:"కొమ్మూరి కృష్ణ", father:"రాజయ్య", enjoyer:"కొమ్మూరి కృష్ణ", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", aadhaarMasked:"XXXX XXXX 3088"},
-  {khata:"3127", village:"పేరుపాలెం", rs:"2-3'", extent:"0.5", pattadar:"శేరు సావిత్రి", father:"శేరు", enjoyer:"శేరు సావిత్రి", landNature:"మెట్ట", landDesc:"ఇంటి స్థలం", aadhaarMasked:"XXXX XXXX 9992"},
-  {khata:"623", village:"పేరుపాలెం", rs:"4-1A'", extent:"0.37", pattadar:"కోప్పినేని వెంకటేశ్వరరావు", father:"నారాయణమూర్తి", enjoyer:"కోప్పినేని వెంకటేశ్వరరావు", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", aadhaarMasked:"XXXX XXXX 7469"},
-  {khata:"1052", village:"పేరుపాలెం", rs:"3-3A'", extent:"0.09", pattadar:"వైదాని నరసింహస్వామి", father:"వెంకమ్మ", enjoyer:"వైదాని సూర్యనారాయణ", landNature:"మెట్ట", landDesc:"ఇంటి స్థలం", aadhaarMasked:"XXXX XXXX 5805"},
-  {khata:"5638", village:"పేరుపాలెం", rs:"5-1'", extent:"0.22", pattadar:"తిరుమాని శ్రీను", father:"పెంటయ్య", enjoyer:"తిరుమాని శ్రీను", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", aadhaarMasked:"XXXX XXXX 3685"}
+  {khata:"585", village:"పేరుపాలెం", rs:"2-1A'", extent:"0.34", pattadar:"కోప్పినేని సీతారామయ్య", father:"సత్యం", enjoyer:"కోప్పినేని సీతారామయ్య", landNature:"మెట్ట", landDesc:"వ్యవసాయ యోగ్యం", mode:"వారసత్వం", aadhaarMasked:"XXXX XXXX 6658"},
+  {khata:"655", village:"పేరుపాలెం", rs:"2-1B'", extent:"0.64", pattadar:"పోన్నమండ నర్సింహస్వామి", father:"వీరస్వామి", enjoyer:"పోన్నమండ నర్సింహస్వామి", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", mode:"స్వంతం", aadhaarMasked:"XXXX XXXX 5483"},
+  {khata:"1731", village:"పేరుపాలెం", rs:"2-1C'", extent:"0.25", pattadar:"నాగిడి వెంకన్న", father:"స్వామి", enjoyer:"నాగిడి రమణ", landNature:"మెట్ట", landDesc:"వ్యవసాయ యోగ్యం", mode:"కొనుగోలు", aadhaarMasked:"XXXX XXXX 1926"},
+  {khata:"4313", village:"పేరుపాలెం", rs:"2-1D'", extent:"0.34", pattadar:"కొమ్మూరి కృష్ణ", father:"రాజయ్య", enjoyer:"కొమ్మూరి కృష్ణ", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", mode:"వారసత్వం", aadhaarMasked:"XXXX XXXX 3088"},
+  {khata:"3127", village:"పేరుపాలెం", rs:"2-3'", extent:"0.5", pattadar:"శేరు సావిత్రి", father:"శేరు", enjoyer:"శేరు సావిత్రి", landNature:"మెట్ట", landDesc:"ఇంటి స్థలం", mode:"వారసత్వం", aadhaarMasked:"XXXX XXXX 9992"},
+  {khata:"623", village:"పేరుపాలెం", rs:"4-1A'", extent:"0.37", pattadar:"కోప్పినేని వెంకటేశ్వరరావు", father:"నారాయణమూర్తి", enjoyer:"కోప్పినేని వెంకటేశ్వరరావు", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", mode:"కొనుగోలు", aadhaarMasked:"XXXX XXXX 7469"},
+  {khata:"1052", village:"పేరుపాలెం", rs:"3-3A'", extent:"0.09", pattadar:"వైదాని నరసింహస్వామి", father:"వెంకమ్మ", enjoyer:"వైదాని సూర్యనారాయణ", landNature:"మెట్ట", landDesc:"ఇంటి స్థలం", mode:"వారసత్వం", aadhaarMasked:"XXXX XXXX 5805"},
+  {khata:"5638", village:"పేరుపాలెం", rs:"5-1'", extent:"0.22", pattadar:"తిరుమాని శ్రీను", father:"పెంటయ్య", enjoyer:"తిరుమాని శ్రీను", landNature:"మాగాణి", landDesc:"వ్యవసాయ యోగ్యం", mode:"స్వంతం", aadhaarMasked:"XXXX XXXX 3685"}
 ];
 
 // ---- LIVE BACKEND CONFIG (fill in after deploying apps-script-backend.gs) ----
@@ -738,6 +855,9 @@ const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbylEN9FY_GOizwa
 // and inside submitForm(), uncomment the fetch(APPS_SCRIPT_URL, {method:'POST', ...}) call.
 
 let selectedRecord = null;
+let lookupMode = 'adangal';
+let editingSerial = null;
+let existingPhotoLink = '';
 let currentStep = 1;
 let submissions = []; // in-memory "submissions sheet" for this session
 let serialCounter = 1;
@@ -799,8 +919,33 @@ async function doLogin(){
 
 function showFormAfterLogin(){
   document.getElementById('loginView').style.display='none';
+  document.getElementById('homeView').style.display='block';
+  document.getElementById('homeUserLabel').textContent = currentUser ? `👤 ${currentUser.fullName}` : '';
+}
+
+function showEntryForm(){
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('searchView').style.display='none';
+  document.getElementById('admin').style.display='none';
+  document.getElementById('reports').style.display='none';
   document.getElementById('formView').style.display='block';
   document.getElementById('currentUserLabel').textContent = currentUser ? `👤 ${currentUser.fullName}` : '';
+  resetForm();
+}
+
+function showSearchView(mode){
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('formView').style.display='none';
+  document.getElementById('admin').style.display='none';
+  document.getElementById('reports').style.display='none';
+  document.getElementById('searchView').style.display='block';
+  lookupMode = mode;
+  const isAdangal = mode === 'adangal';
+  document.getElementById('searchViewTitle').textContent = isAdangal ? 'అడంగల్ శోధన' : '1-బి శోధన';
+  document.getElementById('lookupCardTitle').textContent = isAdangal ? 'అడంగల్ రికార్డు వెతకండి' : '1-బి రికార్డు వెతకండి';
+  document.getElementById('lookupSearchInput').value = '';
+  document.getElementById('lookupSearchResults').style.display = 'none';
+  document.getElementById('lookupDetailCard').style.display = 'none';
 }
 
 function doLogout(){
@@ -861,13 +1006,32 @@ function renderSearchResults(matches, isLive){
     searchResults.innerHTML = '<div class="search-empty">సరిపోలిన రికార్డు కనబడలేదు</div>';
   } else {
     const tag = isLive ? '' : '<div class="search-empty" style="text-align:left;padding:8px 14px;color:#B8860B;font-weight:600;">⚠ డెమో డేటా చూపిస్తోంది — లైవ్ షీట్‌కు కనెక్ట్ కాలేదు</div>';
-    searchResults.innerHTML = tag + matches.map((r,i)=>`
+    const groupNote = buildGroupNote_(matches);
+    searchResults.innerHTML = tag + groupNote + matches.map((r,i)=>`
       <div class="search-result-item" data-idx="${i}">
         <div class="sri-top">${r.khata} — ${r.pattadar}</div>
         <div class="sri-sub">${r.village} &middot; R.S. ${r.rs} &middot; ${r.extent}</div>
       </div>`).join('');
   }
   searchResults.style.display='block';
+}
+
+// When a search matches several rows that all share the same Khata
+// (or all share the same R.S. Number), make that explicit so it's
+// clear the list below is "pick which R.S. Number under this Khata"
+// (or "pick which Khata under this R.S. Number") rather than
+// unrelated matches.
+function buildGroupNote_(matches){
+  if(matches.length < 2) return '';
+  const khatas = new Set(matches.map(r=>r.khata));
+  const rsNums = new Set(matches.map(r=>r.rs));
+  if(khatas.size === 1){
+    return `<div class="search-group-note">ఖాతా ${[...khatas][0]}కు సంబంధించిన సర్వే నంబర్లు — ఒకటి ఎంచుకోండి:</div>`;
+  }
+  if(rsNums.size === 1){
+    return `<div class="search-group-note">సర్వే నంబర్ ${[...rsNums][0]}లో ఖాతాలు — ఒకటి ఎంచుకోండి:</div>`;
+  }
+  return '';
 }
 
 // Event delegation avoids ever embedding raw data (which can contain
@@ -880,6 +1044,103 @@ searchResults.addEventListener('click', (e)=>{
   const record = currentResults[idx];
   if(record) selectRecord(record);
 });
+
+/* ---------- lookup search (Adangal / 1-B — read-only reference lookup) ---------- */
+let lookupDebounce = null;
+let currentLookupResults = [];
+const lookupInput = document.getElementById('lookupSearchInput');
+const lookupResultsEl = document.getElementById('lookupSearchResults');
+
+lookupInput.addEventListener('input', ()=>{
+  const q = lookupInput.value.trim();
+  if(!q){ lookupResultsEl.style.display='none'; document.getElementById('lookupDetailCard').style.display='none'; return; }
+  clearTimeout(lookupDebounce);
+  lookupDebounce = setTimeout(()=>runLookupSearch(q), 250);
+});
+lookupInput.addEventListener('focus', ()=>{ if(lookupInput.value.trim() && currentLookupResults.length) lookupResultsEl.style.display='block'; });
+document.addEventListener('click', (e)=>{
+  if(!e.target.closest('#searchView .search-wrap')) lookupResultsEl.style.display='none';
+});
+
+async function runLookupSearch(q){
+  lookupResultsEl.style.display='block';
+  lookupResultsEl.innerHTML = '<div class="search-empty">వెతుకుతోంది…</div>';
+  try{
+    const res = await fetch(`${APPS_SCRIPT_URL}?action=search&q=${encodeURIComponent(q)}`);
+    if(!res.ok) throw new Error('bad status ' + res.status);
+    const data = await res.json();
+    if(data.error) throw new Error(data.error);
+    renderLookupResults(data, true);
+  }catch(err){
+    console.warn('Live backend unavailable, falling back to demo data:', err);
+    const norm = s => String(s||'').replace(/[''´`]/g,'').replace(/\s+/g,' ').trim().toLowerCase();
+    const qn = norm(q);
+    const matches = MASTER_DATA.filter(r=>
+      norm(r.khata).includes(qn) || norm(r.rs).includes(qn) || norm(r.pattadar).includes(qn)
+    );
+    renderLookupResults(matches, false);
+  }
+}
+
+function renderLookupResults(matches, isLive){
+  currentLookupResults = matches;
+  if(matches.length===0){
+    lookupResultsEl.innerHTML = '<div class="search-empty">సరిపోలిన రికార్డు కనబడలేదు</div>';
+  } else {
+    const tag = isLive ? '' : '<div class="search-empty" style="text-align:left;padding:8px 14px;color:#B8860B;font-weight:600;">⚠ డెమో డేటా చూపిస్తోంది — లైవ్ షీట్‌కు కనెక్ట్ కాలేదు</div>';
+    const groupNote = buildGroupNote_(matches);
+    lookupResultsEl.innerHTML = tag + groupNote + matches.map((r,i)=>`
+      <div class="search-result-item" data-idx="${i}">
+        <div class="sri-top">${r.khata} — ${r.pattadar}</div>
+        <div class="sri-sub">${r.village} &middot; R.S. ${r.rs} &middot; ${r.extent}</div>
+      </div>`).join('');
+  }
+  lookupResultsEl.style.display='block';
+}
+
+lookupResultsEl.addEventListener('click', (e)=>{
+  const item = e.target.closest('.search-result-item');
+  if(!item) return;
+  const idx = parseInt(item.dataset.idx, 10);
+  const record = currentLookupResults[idx];
+  if(record) renderLookupDetail(record);
+});
+
+function renderLookupDetail(r){
+  lookupResultsEl.style.display='none';
+  lookupInput.value = `${r.khata} — ${r.pattadar}`;
+  const isAdangal = lookupMode === 'adangal';
+  const card = document.getElementById('lookupDetailCard');
+  card.style.display='block';
+  card.innerHTML = `
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div><p class="card-title">${isAdangal ? 'అడంగల్ వివరాలు' : '1-బి వివరాలు'}</p><p class="card-sub">గ్రామం: ${r.village}</p></div>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-field"><div class="df-label">ఖాతా నంబర్</div><div class="df-value mono">${r.khata}</div></div>
+        <div class="detail-field"><div class="df-label">సర్వే నెం (R.S. No.)</div><div class="df-value mono">${r.rs}</div></div>
+        <div class="detail-field"><div class="df-label">విస్తీర్ణం</div><div class="df-value">${r.extent}</div></div>
+        <div class="detail-field"><div class="df-label">వర్గీకరణ</div><div class="df-value">${r.landNature || '—'}</div></div>
+      </div>
+      <div class="field">
+        <div class="detail-field"><div class="df-label">భూమి వివరణ</div><div class="df-value">${r.landDesc || '—'}</div></div>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-field"><div class="df-label">పట్టాదారు పేరు</div><div class="df-value">${r.pattadar}</div></div>
+        <div class="detail-field"><div class="df-label">తండ్రి/భర్త పేరు</div><div class="df-value">${r.father || '—'}</div></div>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-field"><div class="df-label">అనుభవదారు పేరు</div><div class="df-value">${r.enjoyer || '—'}</div></div>
+        <div class="detail-field"><div class="df-label">అనుభవ స్వభావం</div><div class="df-value">${r.mode || '—'}</div></div>
+      </div>
+      <div class="field">
+        <div class="detail-field"><div class="df-label">ఆధార్ నంబర్</div><div class="df-value mono">${r.aadhaarMasked || 'నమోదు కాలేదు'}</div></div>
+      </div>
+    </div>`;
+}
+
 
 function selectRecord(record){
   selectedRecord = record;
@@ -938,20 +1199,19 @@ function setPill(q, val){
     if(val==='No'){ answers.q9=''; answers.q10=''; document.getElementById('block-q10').style.display='none';
       document.querySelectorAll('.pill[data-q="q9"],.pill[data-q="q10"]').forEach(p=>p.classList.remove('selected')); }
 
-    // Same person as per Adangal — no need for the VRO to retype the
-    // name/father-name/extent, so auto-fill and lock them from the office record.
+    // Same person as per Adangal — pre-fill the name/father-name/extent
+    // from the office record so the VRO doesn't have to retype them,
+    // but leave them editable (not locked) in case a correction is needed.
     const q7 = document.getElementById('q7'), q7father = document.getElementById('q7father'), q7ext = document.getElementById('q7ext');
     if(val==='No' && selectedRecord){
       q7.value = selectedRecord.pattadar;
       q7father.value = selectedRecord.father;
       q7ext.value = selectedRecord.extent;
-      q7.readOnly = true; q7father.readOnly = true; q7ext.readOnly = true;
       document.getElementById('q7-autohint').style.display='block';
       document.getElementById('q7father-autohint').style.display='block';
       document.getElementById('q7ext-autohint').style.display='block';
       toggleErr('q7', false); toggleErr('q7father', false); toggleErr('q7ext', false);
     } else if(val==='Yes'){
-      q7.readOnly = false; q7father.readOnly = false; q7ext.readOnly = false;
       q7.value=''; q7father.value=''; q7ext.value='';
       document.getElementById('q7-autohint').style.display='none';
       document.getElementById('q7father-autohint').style.display='none';
@@ -1011,7 +1271,7 @@ function handleNext(){
     if(answers.q8==='Yes' && !answers.q9){ alert('దయచేసి ఆధార పత్రాల ప్రశ్నకు సమాధానం ఇవ్వండి.'); ok=false; }
     if(answers.q9==='Yes' && !answers.q10){ alert('పత్రం కాపీ సేకరించారా అని దయచేసి సమాధానం ఇవ్వండి.'); ok=false; }
 
-    const aadhaarValid = /^\d{12}$/.test(answers.q11);
+    const aadhaarValid = editingSerial ? true : /^\d{12}$/.test(answers.q11);
     toggleErr('q11', !aadhaarValid);
     if(!aadhaarValid) ok=false;
 
@@ -1022,7 +1282,7 @@ function handleNext(){
     if(!ok) return;
   }
   if(currentStep===3){
-    if(!applicantPhoto){
+    if(!applicantPhoto && !existingPhotoLink){
       toggleErr('applicantPhoto', true);
       alert('దయచేసి దరఖాస్తుదారు ఫోటో తీయండి.');
       return;
@@ -1090,15 +1350,19 @@ function buildReview(){
 
 /* ---------- submit ---------- */
 async function submitForm(){
-  const serial = `RS-${new Date().getFullYear()}-${String(serialCounter).padStart(6,'0')}`;
+  const isEdit = !!editingSerial;
+  const serial = isEdit ? editingSerial : `RS-${new Date().getFullYear()}-${String(serialCounter).padStart(6,'0')}`;
 
   // duplicate-entry guard: block same Khata Number unless intentionally editing
-  const dup = submissions.find(s=>s.khata===selectedRecord.khata);
-  let allowDuplicate = false;
-  if(dup && !confirm(`ఈ ఖాతాకు ఇప్పటికే ఒక సమర్పణ ఉంది ${selectedRecord.khata} (${dup.serial}). అయినప్పటికీ సవరణగా సమర్పించాలా?`)){
-    return;
+  // (skipped entirely when updating an existing record — that's expected to reuse the same Khata)
+  let allowDuplicate = isEdit;
+  if(!isEdit){
+    const dup = submissions.find(s=>s.khata===selectedRecord.khata);
+    if(dup && !confirm(`ఈ ఖాతాకు ఇప్పటికే ఒక సమర్పణ ఉంది ${selectedRecord.khata} (${dup.serial}). అయినప్పటికీ సవరణగా సమర్పించాలా?`)){
+      return;
+    }
+    if(dup) allowDuplicate = true;
   }
-  if(dup) allowDuplicate = true;
 
   const samePattadar = answers.q8==='No';
   const record = {
@@ -1112,17 +1376,18 @@ async function submitForm(){
     // Only posted when Adangal Pattadar and Re-Survey Pattadar are the
     // same — no need to (re)confirm this office detail otherwise.
     enjoyerExtent: samePattadar ? (selectedRecord.extent || '') : '',
-    hasApplicantPhoto: !!applicantPhoto,
+    hasApplicantPhoto: !!applicantPhoto || !!existingPhotoLink,
     applicantPhotoData: applicantPhoto ? applicantPhoto.data : '',
     timestamp: new Date().toISOString(),
     status: answers.q8==='Yes' ? 'flag' : 'verified',
     username: currentUser ? currentUser.username : '',
+    editSerial: isEdit ? editingSerial : '',
     allowDuplicate
   };
 
   const submitBtn = document.getElementById('submitBtn');
   submitBtn.disabled = true;
-  submitBtn.textContent = 'సమర్పిస్తోంది…';
+  submitBtn.textContent = isEdit ? 'నవీకరిస్తోంది…' : 'సమర్పిస్తోంది…';
 
   try{
     const res = await fetch(APPS_SCRIPT_URL, {method:'POST', body: JSON.stringify(record)});
@@ -1136,27 +1401,38 @@ async function submitForm(){
     console.warn('Live backend unavailable, saved locally only:', err);
   }
 
-  submissions.push(record);
-  serialCounter++;
+  if(!isEdit){ submissions.push(record); serialCounter++; }
   submitBtn.disabled = false; submitBtn.textContent = 'ధృవీకరణను సమర్పించండి';
 
   document.getElementById('finalSubId').textContent = serial;
+  document.getElementById('successTitle').textContent = isEdit ? 'ధృవీకరణ నవీకరించబడింది' : 'ధృవీకరణ సమర్పించబడింది';
+  document.getElementById('successSub').textContent = isEdit
+    ? 'రీ-సర్వే రికార్డు విజయవంతంగా నవీకరించబడింది.'
+    : 'రీ-సర్వే రికార్డు విజయవంతంగా సేవ్ చేయబడింది.';
+  editingSerial = null; existingPhotoLink = '';
   document.getElementById('formView').style.display='none';
   document.getElementById('successView').style.display='block';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function goHome(){
-  const inProgress = selectedRecord || answers.q7 || answers.q11 || answers.q12 || applicantPhoto;
-  if(inProgress && !confirm('ప్రస్తుత నమోదు పూర్తి కాలేదు. కొత్త నమోదు ప్రారంభించాలా? ఇప్పటివరకు నమోదు చేసిన సమాచారం పోతుంది.')){
+  const formVisible = document.getElementById('formView').style.display !== 'none';
+  const inProgress = formVisible && (selectedRecord || answers.q7 || answers.q11 || answers.q12 || applicantPhoto);
+  if(inProgress && !confirm('ప్రస్తుత నమోదు పూర్తి కాలేదు. హోమ్‌కు వెళ్ళాలా? ఇప్పటివరకు నమోదు చేసిన సమాచారం పోతుంది.')){
     return;
   }
+  editingSerial = null;
+  document.getElementById('formView').style.display='none';
+  document.getElementById('searchView').style.display='none';
   document.getElementById('admin').style.display='none';
   document.getElementById('reports').style.display='none';
-  resetForm();
+  document.getElementById('successView').style.display='none';
+  document.getElementById('homeView').style.display='block';
+  document.getElementById('homeUserLabel').textContent = currentUser ? `👤 ${currentUser.fullName}` : '';
 }
 
 function resetForm(){
+  editingSerial = null; existingPhotoLink = '';
   selectedRecord=null; answers.q7=answers.q7father=answers.q7ext=answers.q8=answers.q9=answers.q10=answers.q11=answers.q12='';
   applicantPhoto=null;
   document.getElementById('q7').value=''; document.getElementById('q7').readOnly=false;
@@ -1165,7 +1441,10 @@ function resetForm(){
   document.getElementById('q7-autohint').style.display='none';
   document.getElementById('q7father-autohint').style.display='none';
   document.getElementById('q7ext-autohint').style.display='none';
-  document.getElementById('q11').value=''; document.getElementById('q12').value='';
+  document.getElementById('q11').value=''; document.getElementById('q11').disabled=false;
+  document.getElementById('q12').value='';
+  document.getElementById('existingPhotoNote').style.display='none';
+  document.getElementById('applicantUploadText').textContent = 'దరఖాస్తుదారు ఫోటో తీయడానికి నొక్కండి';
   document.querySelectorAll('.pill').forEach(p=>p.classList.remove('selected'));
   document.getElementById('block-q9').style.display='none'; document.getElementById('block-q10').style.display='none';
   clearRecord(); renderApplicantPhotoPreview();
@@ -1176,6 +1455,8 @@ function resetForm(){
 
 /* ---------- admin dashboard ---------- */
 function showAdmin(){
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('searchView').style.display='none';
   document.getElementById('formView').style.display='none';
   document.getElementById('successView').style.display='none';
   document.getElementById('reports').style.display='none';
@@ -1281,6 +1562,8 @@ let reportData = [];
 let reportsIsLive = false;
 
 function showReports(){
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('searchView').style.display='none';
   document.getElementById('formView').style.display='none';
   document.getElementById('admin').style.display='none';
   document.getElementById('successView').style.display='none';
@@ -1356,13 +1639,15 @@ function renderReportsList(){
     listEl.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><div>రికార్డులు కనబడలేదు</div></div>`;
     return;
   }
-  listEl.innerHTML = list.map(r=>{
+  currentReportsListFiltered = list;
+  listEl.innerHTML = list.map((r,i)=>{
     const statusVal = r['స్థితి']==='flag' ? 'flag' : (r['స్థితి']==='verified' ? 'verified' : 'pending');
     const statusLabel = statusVal==='flag' ? 'ఫ్లాగ్ చేయబడింది' : statusVal==='verified' ? 'ధృవీకరించబడింది' : 'పెండింగ్‌లో ఉంది';
     const photoLink = r['ఫోటో లింక్'];
     const photoHtml = photoLink && photoLink.startsWith('http')
       ? `<a href="${photoLink}" target="_blank" rel="noopener" style="color:var(--blue-700);font-weight:700;">ఫోటో చూడండి →</a>`
       : `<span>${photoLink || 'ఫోటో లేదు'}</span>`;
+    const canEdit = reportsIsLive; // editing needs a real serial + live backend to update the right row
     return `
     <div class="admin-card">
       <div class="admin-card-top">
@@ -1373,8 +1658,77 @@ function renderReportsList(){
         <span>📌 ${r['సర్వే నెం (R.S. No.)']||'—'}</span>
         <span>${photoHtml}</span>
       </div>
+      ${canEdit ? `<div class="btnrow" style="padding:10px 0 0;"><button class="btn btn-secondary" style="padding:9px;font-size:12.5px;" data-edit-idx="${i}">సవరించు</button></div>` : ''}
     </div>`;
   }).join('');
+}
+
+let currentReportsListFiltered = [];
+document.getElementById('reportsList').addEventListener('click', (e)=>{
+  const btn = e.target.closest('[data-edit-idx]');
+  if(!btn) return;
+  const record = currentReportsListFiltered[parseInt(btn.dataset.editIdx, 10)];
+  if(record) editSubmission(record);
+});
+
+function editSubmission(record){
+  editingSerial = record['క్రమ సంఖ్య'] || '';
+  if(!editingSerial){ alert('ఈ రికార్డును సవరించలేము — క్రమ సంఖ్య కనబడలేదు.'); return; }
+
+  selectedRecord = {
+    khata: record['ఖాతా నంబర్'] || '',
+    village: record['గ్రామం'] || '',
+    rs: record['సర్వే నెం (R.S. No.)'] || '',
+    extent: record['కార్యాలయ విస్తీర్ణం'] || '',
+    pattadar: record['అడంగల్ పట్టాదారు పేరు'] || '',
+    father: record['అడంగల్ తండ్రి/భర్త పేరు'] || '',
+    landNature: record['వర్గీకరణ'] || ''
+  };
+  answers.q7 = record['రీ-సర్వే పట్టాదారు పేరు'] || '';
+  answers.q7father = record['రీ-సర్వే తండ్రి/భర్త పేరు'] || '';
+  answers.q7ext = record['రీ-సర్వే ప్రకారం విస్తీర్ణం'] || '';
+  answers.q8 = record['అనుభవదారు వేరా'] || 'No';
+  answers.q9 = record['ఆధార పత్రాలు ఉన్నాయా'] || '';
+  answers.q10 = record['పత్రం కాపీ సేకరించారా'] || '';
+  answers.q11 = record['ఆధార్ (ప్రస్తుత అనుభవదారు)'] || '';
+  answers.q12 = record['ఫోన్ నంబర్'] || '';
+  existingPhotoLink = (record['ఫోటో లింక్'] && String(record['ఫోటో లింక్']).startsWith('http')) ? record['ఫోటో లింక్'] : '';
+  applicantPhoto = null;
+
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('selected'));
+  setPill('q8', answers.q8);
+  if(answers.q8==='Yes' && answers.q9) setPill('q9', answers.q9);
+  if(answers.q9==='Yes' && answers.q10) setPill('q10', answers.q10);
+  // setPill's auto-fill may have overwritten these with the office record —
+  // restore the actual previously-saved values, which may differ (fields
+  // are editable even when the Pattadar matches).
+  document.getElementById('q7').value = answers.q7;
+  document.getElementById('q7father').value = answers.q7father;
+  document.getElementById('q7ext').value = answers.q7ext;
+  document.getElementById('q11').value = answers.q11;
+  document.getElementById('q11').disabled = true; // masked value — re-enter only if it actually needs to change
+  document.getElementById('q12').value = answers.q12;
+
+  const noteEl = document.getElementById('existingPhotoNote');
+  if(existingPhotoLink){
+    noteEl.style.display='block';
+    noteEl.innerHTML = `ఇప్పటికే ఫోటో సేవ్ చేయబడింది — <a href="${existingPhotoLink}" target="_blank" rel="noopener" style="font-weight:700;">చూడండి</a>. కొత్తది తీస్తేనే మారుతుంది.`;
+    document.getElementById('applicantUploadText').textContent = 'కొత్త ఫోటో తీయడానికి నొక్కండి (ఐచ్ఛికం)';
+  } else {
+    noteEl.style.display='none';
+    document.getElementById('applicantUploadText').textContent = 'దరఖాస్తుదారు ఫోటో తీయడానికి నొక్కండి';
+  }
+  renderApplicantPhotoPreview();
+
+  document.getElementById('homeView').style.display='none';
+  document.getElementById('searchView').style.display='none';
+  document.getElementById('admin').style.display='none';
+  document.getElementById('reports').style.display='none';
+  document.getElementById('successView').style.display='none';
+  document.getElementById('formView').style.display='block';
+  document.getElementById('currentUserLabel').textContent = currentUser ? `👤 ${currentUser.fullName}` : '';
+
+  goStep(2); // skip search — the record is already known
 }
 
 function exportReportsCSV(){
